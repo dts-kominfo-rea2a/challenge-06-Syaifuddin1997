@@ -19,9 +19,41 @@ let modifyFile3 = (val) => {
 
 // TODO: Kerjakan bacaData
 // gunakan variabel file1, file2, dan file3
-const bacaData = require('fs');
+const bacaData = (err, data) => {
 
-bacaData.readFile(file1, "utf8", (err, data1) => {
+  const fs = require('fs');
+
+  fs.readFile(file1, "utf8", (err, data1) => {
+
+    if(err) {
+      return console.log(err);
+    } 
+  
+    fs.readFile(file2,"utf8", (err, data2)=> {
+      if(err) {
+        return console.log(err);
+      } 
+  
+      fs.readFile(file3, "utf8", (err, data3)=> {
+        if(err) {
+          return console.log(err);
+        } 
+    
+        let fileJson1 = JSON.parse(data1);
+        let fileJson2 = JSON.parse(data2);
+        let fileJson3 = JSON.parse(data3);
+    
+        let dataJson1 = (fileJson1.message.slice(5));
+        let dataJson2 = (fileJson2[0].message.slice(5));
+        let dataJson3 = (fileJson3[0].data.message.slice(5));
+    
+        return console.log(dataJson1 + ", " + dataJson2 + " ," + dataJson3);
+      });
+    });
+  });
+}
+
+/* bacaData.readFile(file1, "utf8", (err, data1) => {
 
   if(err) {
     return console.log(err);
@@ -48,7 +80,7 @@ bacaData.readFile(file1, "utf8", (err, data1) => {
       return console.log(dataJson1 + ", " + dataJson2 + " ," + dataJson3);
     });
   });
-});
+}); */
 
 
 
