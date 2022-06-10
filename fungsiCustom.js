@@ -38,23 +38,22 @@ const bacaData = (err, data) => {
         if(err) {
           return console.log(err);
         } 
-    
+        
         let fileJson1 = JSON.parse(data1);
         let fileJson2 = JSON.parse(data2);
         let fileJson3 = JSON.parse(data3);
     
-        let dataJson1 = (fileJson1.message.slice(5));
-        let dataJson2 = (fileJson2[0].message.slice(5));
-        let dataJson3 = (fileJson3[0].data.message.slice(5));
-    
-        return console.log(dataJson1 + ", " + dataJson2 + " ," + dataJson3);
+        const dataJson1 = (fileJson1.message.split(' '));
+        const dataJson2 = (fileJson2[0].message.split(' '));
+        const dataJson3 = (fileJson3[0].data.message.split(' '));
+        
+        
+        
+        return console.log( dataJson1[1] + " , " + dataJson2[1] + " , " + dataJson3[1]);
       });
     });
-  });
+  }); 
 }
-
-
-
 
 
 // ! JANGAN DIMODIFIKASI
