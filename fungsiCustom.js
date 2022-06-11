@@ -1,5 +1,6 @@
 // TODO: import module bila dibutuhkan di sini
-const fs = require('fs');
+  const fs = require('fs');
+
 
 // ! JANGAN DIMODIFIKASI
 let file1 = "./data1.json";
@@ -19,36 +20,34 @@ let modifyFile3 = (val) => {
 
 // TODO: Kerjakan bacaData
 // gunakan variabel file1, file2, dan file3
-const bacaData = (fncData) => {
+const bacaData = (funcData) => {
 
-  let varData = []
 
-  fs.readFile(file1,"utf-8", (err, data1) => {
+  const varData = [];
+
+  fs.readFile(file1, "utf-8", (err,data1)=> {
     if(err) {
-      return console.log(err);
-    } 
-    
-    fs.readFile(file2,"utf-8", (err, data2)=> {
+      return funcData(err,null);
+    }
+
+    fs.readFile(file2, "utf-8", (err, data2)=> {
       if(err) {
-        return console.log(err);
+        return funcData(err,null);
       }
-      fs.readFile(file3, "utf-8", (err, data3)=> {
+      
+      fs.readFile(file3, "utf-8",(err, data3)=> {
         if(err) {
-          return console.log(err);
+          return funcData(err,null);
         }
 
-        let fileJson1 = JSON.parse(data1);
-        let fileJson2 = JSON.parse(data2);
-        let fileJson3 = JSON.parse(data3);
+        varData.push(JSON.parse(data1).message.split(' ')[1]);
+        varData.push(JSON.parse(data2)[0].message.split(' ')[1]);
+        varData.push(JSON.parse(data3)[0].data.message.split(' ')[1]);
 
-        varData.push(fileJson1.message.split(' ')[1]);
-        varData.push(fileJson2[0].message.split(' ')[1]);
-        varData.push(fileJson3[0].data.message.split(' ')[1]);
-
-        fncData = (null, varData);
-      });
-    });
-  });
+        funcData(null, varData);
+      })
+    })
+  })
 };
 
 
